@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${K_NAME_FRONT}
+  labels:
+    app: ${K_LABEL_APP_FRONT}
+spec:
+  replicas: ${K_REPLICAS_FRONT}
+  selector:
+    matchLabels:
+      app: ${K_LABEL_APP_FRONT}
+  template:
+    metadata:
+      labels:
+        app: ${K_LABEL_APP_FRONT}
+    spec:
+      containers:
+      - image: ${K_DOCKER_IMAGE}_${K_ARCH}:${K_SERVICE_VERSION}
+        imagePullPolicy: Always
+        name: ${K_IMAGE_NAME_FRONT}
+        command: ["python", "python/main.py"]
+        args: ["--port", "${K_PORT_FRONT}", "--backend", "http://${K_URL_BACK}:${K_PORT_BACK}"]
+      imagePullSecrets:
+      - name: ${K_IMAGE_PULL_SECRET_NAME_FRONT}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ${K_LABEL_APP_FRONT}
+  name: ${K_NAME_FRONT}
+spec:
+  ports:
+  - port: ${K_PORT_FRONT}
+    protocol: TCP
+    targetPort: ${K_PORT_FRONT}
+  selector:
+    app: ${K_LABEL_APP_FRONT}
+  type: LoadBalancer
