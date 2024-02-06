@@ -1,7 +1,5 @@
 env_var_check = $(if $($1),,$(error $1 is not set. $2, e.g. export $1=$3))
 
-cmd_var_check =$(if $($1),,$(error $1 not defined. Must pass $1 $2))
-
 #export ARCH ?= $(shell hzn architecture)
 export ARCH ?= amd64
 
