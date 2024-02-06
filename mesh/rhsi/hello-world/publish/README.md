@@ -78,7 +78,9 @@ export K_URL_BACK=${K_NAME_BACK}
 ### 2. Build, push and deploy application 
 Single `make` command builds the images, pushes into contaienr registry and deploys the application into the NAMESPACE as specified.
 ```
-make NAMESPACE=<namespace-to-deploy-application-in>
+make -c src/backend NAMESPACE=<backtend-namespace-to-deploy-application-in>
+make -c src/frontend NAMESPACE=<frontend-namespace-to-deploy-application-in>
+
 ```
 
 ### Reference:
