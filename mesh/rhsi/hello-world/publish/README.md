@@ -80,7 +80,6 @@ Single `make` command builds the images, pushes into contaienr registry and depl
 ```
 make -c src/backend NAMESPACE=<backtend-namespace-to-deploy-application-in>
 make -c src/frontend NAMESPACE=<frontend-namespace-to-deploy-application-in>
-
 ```
 
 ### Reference:
