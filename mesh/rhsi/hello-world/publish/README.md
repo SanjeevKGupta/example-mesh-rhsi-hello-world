@@ -1,4 +1,4 @@
-## IBM Hybrid Cloud Mesh - hello world - my example
+## IBM Hybrid Cloud Mesh - hello world - my custom example
 This leverages skupperproject hello world example. 
 1. [Setup ENVIRONMENT variables](#1-setup-environment-variables) 
 2. [Build, push and deploy application](#2-build-push-and-deploy-application)
