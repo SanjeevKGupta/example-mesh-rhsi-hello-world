@@ -1,7 +1,7 @@
 ## IBM Hybrid Cloud Mesh - hello world - my example
 This leverages skupperproject hello world example. 
-1. [Setup ENVIRONMENT variables]() 
-2. [Build, push and deploy application]()
+1. [Setup ENVIRONMENT variables](#1-setup-environment-variables) 
+2. [Build, push and deploy application](#2-build-push-and-deploy-application)
 
 In my example the prcess to build, push and deploy the k8s hello-world example has been significantly auotomated. Distinct steps are:
 - Build the docker images with identifiable names across project team members
