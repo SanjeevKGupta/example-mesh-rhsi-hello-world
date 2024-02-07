@@ -18,12 +18,14 @@ all: build push apply_kube
 check_var_namespace:
 	$(call cmd_var_check,NAMESPACE,as make <target> NAMESPACE=<namespace>)
 	@echo ""
+	@echo "\033[1;30mCheching namespace ${NAMESPACE} \033[0m"
 	@echo "NAMESPACE: ${NAMESPACE}"
-	@echo ""
 
 # Build the docker container
 build:
-	docker build --platform linux/${ARCH} -t ${DOCKER_IMAGE}_$(ARCH):${SERVICE_VERSION} -f ./Dockerfile.${ARCH} .
+	@echo ""
+	@echo "\033[1;30mBuilding image ${DOCKER_IMAGE}_$(ARCH):${SERVICE_VERSION} \033[0m"
+	@docker build --platform linux/${ARCH} -t ${DOCKER_IMAGE}_$(ARCH):${SERVICE_VERSION} -f ./Dockerfile.${ARCH} .
 
 test_docker_run:
 	@echo "To test, curl in a different terminal"
@@ -32,8 +34,13 @@ test_docker_run:
 
 # Push the docker container to the authenticatd CR
 push:
-	docker login ${CR_HOST} -u ${CR_HOST_USERNAME} -p ${CR_APP_API_KEY_RW_PUSH}
-	docker push $(DOCKER_IMAGE)_$(ARCH):$(SERVICE_VERSION)
+	@echo ""
+	@echo "\033[1;30mLogin into container registry ${CR_HOST} \033[0m"
+	@echo "${CR_APP_API_KEY_RW_PUSH}" | docker login ${CR_HOST} -u ${CR_HOST_USERNAME} --password-stdin
+
+	@echo ""
+	@echo "\033[1;30mPushing image $(DOCKER_IMAGE)_$(ARCH):$(SERVICE_VERSION) \033[0m"
+	@docker push $(DOCKER_IMAGE)_$(ARCH):$(SERVICE_VERSION)
 
 -include ../../env.var.app.kube.mk
 test_kube_envsubst:
@@ -43,11 +50,21 @@ create_namespace: check_var_namespace
 	$(shell kubectl create namespace ${NAMESPACE} > /dev/null 2>&1)
 
 create_image_pull_secret: create_namespace
-	$(kubectl delete secret ${K_IMAGE_PULL_SECRET_NAME} -n ${NAMESPACE} > /dev/null 2>&1)
+	@echo ""
+	@echo "\033[1;30mDeleting existing image pull secret ${K_IMAGE_PULL_SECRET_NAME_BACK} \033[0m"
+	$(kubectl delete secret ${K_IMAGE_PULL_SECRET_NAME_BACK} -n ${NAMESPACE} > /dev/null 2>&1)
+
+	@echo ""
+	@echo "\033[1;30mCreating new image pull secret ${K_IMAGE_PULL_SECRET_NAME_BACK} \033[0m"
 	$(shell kubectl create secret docker-registry ${K_IMAGE_PULL_SECRET_NAME_BACK} -n ${NAMESPACE} --docker-server=${CR_HOST} --docker-username=${CR_HOST_USERNAME} --docker-password=${CR_APP_API_KEY_RO_PULL} --docker-email="" > /dev/null 2>&1)
 
 apply_kube: create_image_pull_secret
+	@echo ""
+	@echo "\033[1;30mDeleting existing deployment ${K_NAME_BACK} \033[0m"
 	$(shell kubectl delete deploy ${K_NAME_BACK} -n ${NAMESPACE} > /dev/null 2>&1)
+
+	@echo ""
+	@echo "\033[1;30mCreating new deployment in namespace ${NAMESPACE} \033[0m"
 	envsubst < ./kube/deploy-backend.yaml.tmpl > ./kube/deploy-backend.yaml | kubectl apply -n ${NAMESPACE} -f ./kube/deploy-backend.yaml
 
 # This imports the variables from hzn.json
