@@ -31,10 +31,8 @@ COPY ./service/python/main.py /app/python/main.py
 COPY ./service/static/gesso /app/static/gesso
 COPY ./service/static/index.html /app/static/index.html
 COPY ./service/static/main.css /app/static/main.css
-COPY ./service/static/mesh_icon_light.png /app/static/mesh_icon_light.png
+COPY ./service/static/logo.css /app/static/logo.css
 COPY ./service/static/main.js /app/static/main.js
-COPY ./service/static/mesh_icon_light.png /mesh_icon_light.png
-COPY ./service/static/mesh_icon_light.png /app/mesh_icon_light.png
 
 WORKDIR /app
 

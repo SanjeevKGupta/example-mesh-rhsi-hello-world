@@ -1,12 +1,12 @@
 import * as gesso from "./gesso/gesso.js";
 
 const html = `
-<body>
+<body bgcolor="#a6c8ff">
   <header>
     <div>
       <div>
-        <!--h3><img src="./mesh_icon_light.png"/>&nbsp;&nbsp;&nbsp;&nbsp;Hybrid Cloud Mesh - RHSI - Hello World</h3-->
-        <h3><span class="material-icons-outlined">hub</span>&nbsp;&nbsp;&nbsp;&nbsp;Hybrid Cloud Mesh - RHSI - Hello World</h3>
+        <div class="logo"></div><div class="headline">Hybrid Cloud Mesh - RHSI - Hello World</div>
+        <!--h3><span class="material-icons-outlined">hub</span>&nbsp;&nbsp;&nbsp;&nbsp;Hybrid Cloud Mesh - RHSI - Hello World</h3-->
       </div>
     </div>
   </header>

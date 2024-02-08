@@ -4,32 +4,11 @@
     <title>Hybrid Cloud Mesh - RHSI - Hello World</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="/static/main.css"/>
+    <link rel="stylesheet" href="/static/logo.css"/>
     <script type="module" src="/static/main.js"></script>
-    <script>
-      function loadImage() {
-	  var img = document.createElement("img");
-	  img.src = "mesh_icon_light.png";
-	  img.width = 50;
-	  img.height = 50;
-	  var logo = document.getElementById("logo");
-	  logo.appendChild(img);
-      }
-
-      function loadLogo() {
-	  var image = document.images[0];
-
-	  var downloadingImage = new Image();
-	  downloadingImage.onload = function(){
-	      image.src = this.src;   
-	  };
-
-	  downloadingImage.src = "mesh_icon_light.png";
-      }
-
-    </script>
   </head>
-  <body>
-     <img id="logo"></img>
+  <body bgcolor="#a6c8ff">
      <div id="content"></div>
   </body>
 </html>
+
