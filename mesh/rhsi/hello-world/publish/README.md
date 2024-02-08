@@ -35,7 +35,7 @@ export CR_APP_API_KEY_RW_PUSH=<cr-read-write-push-api-key>
 ##################################
 ```
 #### ENV open horizon
-The Hybrid Cloud Mesh - RHSI implementation uses open-horizon (an OSS) to deploy RHSI (skupper) pods. Following ENVs relate with that.   
+The Hybrid Cloud Mesh - RHSI implementation uses open-horizon (an OSS) to deploy RHSI (skupper) pods. Following ENVs relate with that and needs to be obtained from `agent-install.cfg` file after agent is installed
 
 **File:** env-app-hzn
 ```
