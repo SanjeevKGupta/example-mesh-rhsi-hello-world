@@ -1,7 +1,7 @@
 import * as gesso from "./gesso/gesso.js";
 
 const html = `
-<body bgcolor="#a6c8ff">
+<body>
   <header>
     <div>
       <div>
